@@ -1,6 +1,4 @@
-.App {
-  text-align: center;
-}
+
 
 .App-logo {
   height: 40vmin;
@@ -35,4 +33,53 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.no-suggestions {
+  position: absolute;
+  margin-top: 62px; 
+}
+
+.input {
+  display: block;
+  /*removing underlines from anchor element*/
+  text-decoration: none;
+  text-decoration: none;
+  color: black;
+  background-color: #d2dedd;
+  cursor: pointer;
+}
+.suggestions {
+  list-style: none;
+  position: absolute;
+  margin-top: 185px;
+  width: 240px;
+  height: 300px;
+  overflow: scroll;
+  z-index: 20;
+}
+
+/*now first we will hide the suggestion list*/
+.suggestions input {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.byline {
+  text-align: center;
+  font-size: 18px;
+}
+.byline a {
+  text-decoration: none;
+  color: #1f5350;
+}
+
+.auto {
+  margin: auto;
+}
+
+button {
+  margin-top: 30px;
 }
