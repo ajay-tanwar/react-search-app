@@ -52,11 +52,11 @@
 .suggestions {
   list-style: none;
   position: absolute;
-  margin-top: 185px;
   width: 240px;
   height: 300px;
   overflow: scroll;
   z-index: 20;
+  border: 2px solid;
 }
 
 /*now first we will hide the suggestion list*/

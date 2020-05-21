@@ -7,22 +7,18 @@ class MaterialDataTable extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            isSelection: false,
+            rowIndex: '',
         }
     }
 
-    onSelectionChange = () => {
+    onSelectionChange = (rows) => {
         this.setState({
-            isSelection: !this.state.isSelection,
+            rowIndex: rows.length
         })
     }
 
-    getCertificate = () => {
-        window.open(Certificate, 'Download'); 
-    }
-
-    TableAction = () => {
-        const {isSelection} = this.state
+    TableAction = (data) => {
+        const {rowIndex} = this.state
         return (
             {
                 field: 'action',
@@ -31,7 +27,7 @@ class MaterialDataTable extends React.PureComponent {
                 filtering: false,
                 render: rowData => (
                     <React.Fragment>
-                        {isSelection ? <a href={Certificate} download>Get Certificate</a> : null}
+                        {rowIndex ? <a href={Certificate} download>Get Certificate</a> : null}
                     </React.Fragment >
                 )
             }
@@ -40,9 +36,7 @@ class MaterialDataTable extends React.PureComponent {
 
     render() {
         const {data} = this.props
-        const {isSelection} = this.state
         const columns = []
-        const actions = []
         columns.push({
             title: "Registration Id",
             field: "Registration Id"
@@ -56,7 +50,7 @@ class MaterialDataTable extends React.PureComponent {
             field: "Ticket_Name"
         })
 
-        columns.push(this.TableAction())
+        columns.push(this.TableAction(data))
 
         const options = {
             selection: true,
@@ -72,8 +66,7 @@ class MaterialDataTable extends React.PureComponent {
                     data={data}
                     options={options}
                     columns={columns}
-                    onSelectionChange={this.onSelectionChange}
-                    actions={actions}
+                    onSelectionChange={(rows) => this.onSelectionChange(rows)}
                 />
             </div>
         )
