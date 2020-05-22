@@ -17,7 +17,7 @@ class MaterialDataTable extends React.PureComponent {
         })
     }
 
-    TableAction = (data) => {
+    Actions = () => {
         const {rowIndex} = this.state
         return (
             {
@@ -50,7 +50,7 @@ class MaterialDataTable extends React.PureComponent {
             field: "Ticket_Name"
         })
 
-        columns.push(this.TableAction(data))
+        columns.push(this.Actions())
 
         const options = {
             selection: true,

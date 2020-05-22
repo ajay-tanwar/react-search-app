@@ -52,7 +52,7 @@ class Search extends React.Component {
                         <Col md={4}>
                         <FormGroup>
                             <Label for="exampleSelect" className="mr-sm-2">Kilo Meter</Label>
-                            <Input type="select" name="kiloMeter" id="kiloMeter" onChange={this.onChange}>
+                            <Input  type="select" name="kiloMeter" id="kiloMeter" onChange={this.onChange}>
                                 <option>Select KiloMeter</option>
                                 {kiloMeter && kiloMeter.map((data) => 
                                     <option>{data.Ticket_Name}</option>
@@ -62,7 +62,7 @@ class Search extends React.Component {
                         </Col>
                         <Col md={2}>
                         <FormGroup>
-                            <Button>Search</Button>
+                            <Button color="info">Search</Button>
                         </FormGroup>  
                         </Col>
                     </Row>

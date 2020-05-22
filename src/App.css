@@ -37,7 +37,7 @@
 
 .no-suggestions {
   position: absolute;
-  margin-top: 62px; 
+  margin-top: 5px; 
 }
 
 .input {
@@ -47,7 +47,6 @@
   text-decoration: none;
   color: black;
   background-color: #d2dedd;
-  cursor: pointer;
 }
 .suggestions {
   list-style: none;
@@ -59,12 +58,17 @@
   border: 2px solid;
 }
 
+.no-suggestions .input {
+  display: none;
+}
+
 /*now first we will hide the suggestion list*/
 .suggestions input {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  cursor: pointer!important;
 }
 
 .byline {
