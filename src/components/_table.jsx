@@ -9,6 +9,7 @@ class MaterialDataTable extends React.PureComponent {
         this.state = {
             rowIndex: '',
         }
+        console.log(Certificate)
     }
 
     onSelectionChange = (rows) => {
@@ -27,7 +28,7 @@ class MaterialDataTable extends React.PureComponent {
                 filtering: false,
                 render: rowData => (
                     <React.Fragment>
-                        {rowIndex && rowIndex.find(o => o['Registration Id'] === rowData['Registration Id']) ? <a href={Certificate} download>Get Certificate</a> : null}
+                        {rowIndex && rowIndex.find(o => o['Registration Id'] === rowData['Registration Id']) ? <a href={Certificate} download={`Certificate_${rowData['Registration Id']}`}>Get Certificate</a> : null}
                     </React.Fragment >
                 )
             }
