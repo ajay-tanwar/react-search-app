@@ -13,7 +13,7 @@ class MaterialDataTable extends React.PureComponent {
 
     onSelectionChange = (rows) => {
         this.setState({
-            rowIndex: rows.length
+            rowIndex: rows
         })
     }
 
@@ -27,7 +27,7 @@ class MaterialDataTable extends React.PureComponent {
                 filtering: false,
                 render: rowData => (
                     <React.Fragment>
-                        {rowIndex ? <a href={Certificate} download>Get Certificate</a> : null}
+                        {rowIndex && rowIndex.find(o => o['Registration Id'] === rowData['Registration Id']) ? <a href={Certificate} download>Get Certificate</a> : null}
                     </React.Fragment >
                 )
             }
