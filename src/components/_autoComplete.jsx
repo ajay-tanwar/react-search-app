@@ -84,6 +84,7 @@ export class Autocomplete extends Component {
         suggestionsListComponent = (
           <div class="suggestions">
             {filteredSuggestions.map((suggestion, index) => {
+              
               let className;
 
               if (index === activeSuggestion) {
@@ -91,7 +92,7 @@ export class Autocomplete extends Component {
               }
 
               return (
-                <Input key={suggestion} onClick={onClick} name="name" value={suggestion}>
+                <Input onClick={onClick} name="name" value={suggestion}>
                 </Input>
               );
             })}
