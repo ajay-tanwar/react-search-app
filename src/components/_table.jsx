@@ -73,7 +73,7 @@ class MaterialDataTable extends React.PureComponent {
 
         // Serialize the PDFDocument to bytes (a Uint8Array)
         const pdfBytes = await pdfDoc.save()
-        download(pdfBytes, `${item['Attendee Name']}_Certificate.pdf`, "application/pdf");
+        download(pdfBytes, `${item['Attendee Name']}_${item['City']}_Certificate.pdf`, "application/pdf");
     }
 
     render() {
