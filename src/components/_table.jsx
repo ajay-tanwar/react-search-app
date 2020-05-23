@@ -28,7 +28,7 @@ class MaterialDataTable extends React.PureComponent {
                 filtering: false,
                 render: rowData => (
                     <React.Fragment>
-                        <a href="#" onClick={() => this.downloadCertificate(rowData)}>Get Certificate</a>
+                        <a href="#" onClick={() => this.downloadCertificate(rowData)}>Download Certificate</a>
                     </React.Fragment >
                 )
             }
@@ -54,10 +54,10 @@ class MaterialDataTable extends React.PureComponent {
         const { width, height } = firstPage.getSize()
 
         // Draw a string of text diagonally across the first page
-        firstPage.drawText(item['Attendee Name'], {
+        firstPage.drawText(`${item['Attendee Name']} - ${item['City']}`, {
             x: 320,
             y: 330,
-            size: 25,
+            size: 20,
             font: helveticaFont,
             top:400,
             color: rgb(0.9,0.4,0.1),
