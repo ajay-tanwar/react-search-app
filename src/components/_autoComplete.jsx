@@ -84,7 +84,6 @@ export class Autocomplete extends Component {
         suggestionsListComponent = (
           <div class="suggestions">
             {filteredSuggestions.map((suggestion, index) => {
-              
               let className;
 
               if (index === activeSuggestion) {

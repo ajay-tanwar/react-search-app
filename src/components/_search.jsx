@@ -15,21 +15,31 @@ class Search extends React.Component {
     }
 
     onChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    }
+        const value = e.target.value
+        const splitName = value.split(" (")
+        // this.setState({
+        //     [e.target.name]: e.target.value
+        // });
 
-    onSubmit = (e) => {
-        e.preventDefault()
-        const {name, kiloMeter} = this.state
         let filterData = data.filter(function (e) {
-            return e.Ticket_Name == kiloMeter && name == e['Attendee Name'];
+            
+            return splitName[0] == e['Attendee Name'];
         });
         this.setState({
             filterData: filterData
         })
     }
+
+    // onSubmit = (e) => {
+    //     e.preventDefault()
+    //     const {name, kiloMeter} = this.state
+    //     let filterData = data.filter(function (e) {
+    //         return name == e['Attendee Name'];
+    //     });
+    //     this.setState({
+    //         filterData: filterData
+    //     })
+    // }
 
     render(){
         const kiloMeter = Object.values(data.reduce((acc,cur)=>Object.assign(acc,{[cur.Ticket_Name]:cur}),{}))
@@ -40,16 +50,16 @@ class Search extends React.Component {
                     <Row form>
                         <Col md={6}>
                         <FormGroup>
-                            <Label for="name" className="mr-sm-2">Name</Label>
+                            <Label for="name" className="mr-sm-2">Search Name</Label>
                             <Autocomplete
                                 suggestions={data && data.map((data) =>
-                                    data["Attendee Name"]
+                                    data["Attendee Name"] + " (" + data['Ticket_Name'] + " )"
                                 )}
                                 onChange={this.onChange}
                             />
                         </FormGroup>
                         </Col>
-                        <Col md={4}>
+                        {/* <Col md={4}>
                         <FormGroup>
                             <Label for="exampleSelect" className="mr-sm-2">Kilo Meter</Label>
                             <Input  type="select" name="kiloMeter" id="kiloMeter" onChange={this.onChange}>
@@ -64,7 +74,7 @@ class Search extends React.Component {
                         <FormGroup>
                             <Button color="info">Search</Button>
                         </FormGroup>  
-                        </Col>
+                        </Col> */}
                     </Row>
                 </Form>
                 <div className="mt-5 filter-table">

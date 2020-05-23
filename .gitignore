@@ -2,3 +2,9 @@ node_modules
 *.lock.json
 .next
 out
+.firebaserc
+firebase.json
+.firebase/
+build/
+public/.DS_Store
+src/data/.DS_Store

@@ -1,6 +1,7 @@
 import React from "react";
 import MaterialTable from 'material-table';
-import Certificate from '../data/Certificate.jpg'
+import { degrees, PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import download from 'downloadjs'
 
 class MaterialDataTable extends React.PureComponent {
 
@@ -9,7 +10,6 @@ class MaterialDataTable extends React.PureComponent {
         this.state = {
             rowIndex: '',
         }
-        console.log(Certificate)
     }
 
     onSelectionChange = (rows) => {
@@ -28,11 +28,52 @@ class MaterialDataTable extends React.PureComponent {
                 filtering: false,
                 render: rowData => (
                     <React.Fragment>
-                        {rowIndex && rowIndex.find(o => o['Registration Id'] === rowData['Registration Id']) ? <a href={Certificate} download={`Certificate_${rowData['Registration Id']}`}>Get Certificate</a> : null}
+                        <a href="#" onClick={() => this.downloadCertificate(rowData)}>Get Certificate</a>
                     </React.Fragment >
                 )
             }
         )
+    }
+
+    async downloadCertificate(item) {
+        const url = "/Certificate.pdf"
+
+  		const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
+
+        // Load a PDFDocument from the existing PDF bytes
+        const pdfDoc = await PDFDocument.load(existingPdfBytes)
+
+        // Embed the Helvetica font
+        const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica)
+
+        // Get the first page of the document
+        const pages = pdfDoc.getPages()
+        const firstPage = pages[0]
+
+        // Get the width and height of the first page
+        const { width, height } = firstPage.getSize()
+
+        // Draw a string of text diagonally across the first page
+        firstPage.drawText(item['Attendee Name'], {
+            x: 320,
+            y: 330,
+            size: 25,
+            font: helveticaFont,
+            top:400,
+            color: rgb(0.9,0.4,0.1),
+        })
+
+        firstPage.drawText(item['Ticket_Name'], {
+            x: 330,
+            y: 278,
+            size: 15,
+            font: helveticaFont,
+            color: rgb(0.9,0.4,0.1),
+        })
+
+        // Serialize the PDFDocument to bytes (a Uint8Array)
+        const pdfBytes = await pdfDoc.save()
+        download(pdfBytes, `${item['Attendee Name']}_Certificate.pdf`, "application/pdf");
     }
 
     render() {
@@ -54,7 +95,6 @@ class MaterialDataTable extends React.PureComponent {
         columns.push(this.Actions())
 
         const options = {
-            selection: true,
             actionsColumnIndex: -1,
             search: true,
             sorting: true,
