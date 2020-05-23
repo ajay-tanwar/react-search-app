@@ -36,6 +36,8 @@ class MaterialDataTable extends React.PureComponent {
     }
 
     async downloadCertificate(item) {
+
+        const kiloMeter = item['Ticket_Name'].split(" ")
         const url = "/Certificate.pdf"
 
   		const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer())
@@ -55,20 +57,20 @@ class MaterialDataTable extends React.PureComponent {
 
         // Draw a string of text diagonally across the first page
         firstPage.drawText(`${item['Attendee Name']} - ${item['City']}`, {
-            x: 320,
-            y: 330,
-            size: 20,
+            x: 285,
+            y: 410,
+            size: 18,
             font: helveticaFont,
             top:400,
-            color: rgb(0.9,0.4,0.1),
+            color: rgb(0.8,0.1,0),
         })
 
-        firstPage.drawText(item['Ticket_Name'], {
-            x: 330,
-            y: 278,
+        firstPage.drawText(`${kiloMeter[0]} ${kiloMeter[1]}`, {
+            x: 230,
+            y: 375,
             size: 15,
             font: helveticaFont,
-            color: rgb(0.9,0.4,0.1),
+            color: rgb(0.8,0.1,0),
         })
 
         // Serialize the PDFDocument to bytes (a Uint8Array)
